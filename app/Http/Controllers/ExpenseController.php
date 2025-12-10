@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Expense;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
     public function index()
     {
+        // Auth::user() == auth()->user()
+
         return view('dashboard', [
-            'expenses' => Expense::all()
+            'expenses' => Auth::user()->expenses
         ]);
     }
 
@@ -25,6 +28,7 @@ class ExpenseController extends Controller
         ]);
 
         Expense::create([
+            'user_id' => auth()->user()->id,
             'title' => $request->title, //'Lunch'
             'description' => $request->description, //'Makan di office'
             'amount' => $request->amount, //12.50,

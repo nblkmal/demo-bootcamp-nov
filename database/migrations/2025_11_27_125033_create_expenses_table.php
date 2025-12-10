@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('title'); // column name must be a string but cannot be null
             $table->string('description')->nullable();  // column description must be a string and can be null
             $table->bigInteger('amount')->nullable();
