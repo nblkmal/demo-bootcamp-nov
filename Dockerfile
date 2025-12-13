@@ -25,6 +25,9 @@ COPY .env.example .env
 
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
+RUN php artisan key:generate
+RUN php artisan migrate
+RUN php artisan db:seed
 
 # Build frontend assets
 RUN npm install && npm run build
